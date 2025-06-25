@@ -1,4 +1,5 @@
 (ns dog-breed-app.subscriptions
+  "Subscription handling namespace."
   (:require
    [re-frame.core :as rf]))
 
@@ -34,8 +35,8 @@
 
 (rf/reg-sub
  :images/paged
- (fn [{:keys [images/page images/page-size]} [_ images]]
-   (when images
+ (fn [{:keys [images/page images/page-size breed-images]} [_ breed]]
+   (when-let [images (get breed-images breed)]
      (let [start (* (dec page) page-size)
            end (min (count images) (+ start page-size))]
        (subvec images start end)))))

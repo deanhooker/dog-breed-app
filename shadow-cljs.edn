@@ -3,17 +3,25 @@
  ["src/main"]
 
  :dependencies
- [[reagent "1.3.0"]
-  [re-frame "1.4.3"]
+ [[cljs-ajax "0.8.4"]
   [day8.re-frame/http-fx "0.2.4"]
-  [cljs-ajax "0.8.4"]
-  [metosin/reitit-frontend "0.5.18"]]
+  [day8.re-frame/test "0.1.5"]
+  [metosin/reitit-frontend "0.5.18"]
+  [re-frame "1.4.3"]
+  [reagent "1.3.0"]]
 
  :builds
  {:app
   {:target :browser
    :output-dir "public/js"
+   :asset-path "/js"
    :modules {:main {:init-fn dog-breed-app.core/init}}
-   :devtools {:after-load dog-breed-app.core/start}}}
+   :devtools {:after-load dog-breed-app.core/start}}
+
+  :test
+  {:target :node-test
+   :output-to "out/tests.js"
+   :ns-regexp "-test$"}
+  }
 
  :dev-http {8000 "public"}}
